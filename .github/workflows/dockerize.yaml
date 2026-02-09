@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: check rebo event
         id: S1
-        run: echo "$name is doing ${{github.event_name}} >> $GITHUBVAR"
+        run: echo "$name is doing ${{github.event_name}} >> $GITHUB_OUTPUT"
 
   job-3:
     runs-on: ubuntu-latest
