@@ -18,7 +18,20 @@ jobs:
         run: echo "this Github action run by $name and use the key ${{secrets.AWS_KEY}} and ${{secrets.TEST}}"
 
   job-2:
+    outputs:
+      V: ${{steps.S1.outputs.V}}
     runs-on: ubuntu-latest
     steps:
       - name: check rebo event
-        run: echo "$name is doing ${{github.event_name}}"
+        id: S1
+        run: echo "$name is doing ${{github.event_name}} >> $GITHUBVAR"
+
+  job-3:
+    runs-on: ubuntu-latest
+    needs:
+      - say-hello
+      - job-2
+    steps:
+      - name: check rebo event
+        id: S1
+        run: echo "${{needs.job-2.outputs.V}}"
