@@ -6,12 +6,19 @@ on:
     branches:
       - "master"
 
+env:
+  name: "abdelkader Boukert"
+
 jobs:
   say-hello:
     runs-on: ubuntu-latest
     environment: Keys
-    env:
-      name: "abdelkader Boukert"
     steps:
       - name: Run a one-line script
         run: echo "this Github action run by $name and use the key ${{secrets.AWS_KEY}} and ${{secrets.TEST}}"
+
+  job-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check rebo event
+        run: echo "$name is doing ${{github.event_name}}"
