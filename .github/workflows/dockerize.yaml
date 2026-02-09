@@ -9,6 +9,9 @@ on:
 jobs:
   say-hello:
     runs-on: ubuntu-latest
+    environment: Keys
+    env:
+      name: "abdelkader Boukert"
     steps:
       - name: Run a one-line script
-        run: echo "GitHub Actions is working from my WSL setup!"
+        run: echo "this Github action run by $name and use the key ${{secrets.AWS_KEY}} and ${{secrets.TEST}}"
