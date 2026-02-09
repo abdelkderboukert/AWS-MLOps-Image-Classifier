@@ -1,12 +1,14 @@
 name: first-try
-on: 
+
+on:
   workflow_dispatch:
   push:
     branches:
       - "master"
 
 jobs:
-  hellow-word:
-    runs-on: ubuntu
+  say-hello:
+    runs-on: ubuntu-latest
     steps:
-      - run: echo "hi there i am abdelkader"
+      - name: Run a one-line script
+        run: echo "GitHub Actions is working from my WSL setup!"
