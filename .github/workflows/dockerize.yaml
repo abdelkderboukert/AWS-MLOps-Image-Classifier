@@ -1,0 +1,12 @@
+name: first-try
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  hellow-word:
+    runs-on: ubuntu
+    steps:
+      - run: echo "hi there i am abdelkader"
