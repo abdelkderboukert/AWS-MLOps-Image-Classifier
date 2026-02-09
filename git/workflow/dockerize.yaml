@@ -1,0 +1,12 @@
+name: dockerise the project
+
+on:
+  push: branch[master]
+  workflow_dispatch:
+
+jobs:
+  check_code:
+    run_on: ubuntu
+    steps:
+      - run: echo "hi there the code is working"
+        shell: bash
