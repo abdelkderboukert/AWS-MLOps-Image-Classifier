@@ -19,12 +19,24 @@ jobs:
 
   job-2:
     outputs:
-      V: ${{steps.S1.outputs.V}}
+      V: ${{steps.S11.outputs.V}}
     runs-on: ubuntu-latest
     steps:
       - name: check rebo event
-        id: S1
-        run: echo "$name is doing ${{github.event_name}} >> $GITHUB_OUTPUT"
+        id: S11
+        run: |
+          # 1. Saving a variable for the NEXT JOB to use
+          echo "V=${{ env.name }} is doing ${{ github.event_name }}" >> $GITHUB_OUTPUT
+
+          # 2. Creating a physical file to SAVE as an artifact
+          echo "hi there this is test" >> test.txt
+
+      - name: upload file
+        id: S12
+        uses: actions/upload-artifact@v4
+        with:
+          name: test
+          path: test.txt
 
   job-3:
     runs-on: ubuntu-latest
@@ -33,5 +45,13 @@ jobs:
       - job-2
     steps:
       - name: check rebo event
-        id: S1
+        id: S21
         run: echo "${{needs.job-2.outputs.V}}"
+      - name: download file
+        id: S22
+        uses: actions/download-artifact@v4
+        with:
+          name: test
+      - name: show file
+        id: S23
+        run: cat test.txt
