@@ -1,9 +1,11 @@
 numpy
 pandas
 opencv-python
-matplotlib
 nltk
 scikit-learn
 xgboost
 lightgbm
 pycocoevalcap
+boto3
+aws-cdk-lib
+constructs
