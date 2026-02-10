@@ -1,6 +1,12 @@
 import os
 
-# Paths
+S3_BUCKET = os.getenv("S3_BUCKET_NAME", "your-default-bucket-name")
+S3_DATA_KEY = "data/archive.zip"
+
+# Local Paths (Used as temporary buffers)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, 'data')
+ZIP_PATH = os.path.join(DATA_DIR, 'raw', 'archive.zip')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 ZIP_PATH = os.path.join(DATA_DIR, 'raw', 'archive.zip')

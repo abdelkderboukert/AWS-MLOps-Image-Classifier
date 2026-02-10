@@ -12,9 +12,21 @@ from src.features import VisualFeatureExtractor
 from src.models import train_and_tune
 from src.evaluation import evaluate_classifier, calculate_nlp_metrics
 from src.utils import get_predicted_keywords, generate_caption
+import boto3
+from src.config import S3_BUCKET, S3_DATA_KEY, ZIP_PATH
+
+def download_data_from_s3():
+    s3 = boto3.client('s3')
+    os.makedirs(os.path.dirname(ZIP_PATH), exist_ok=True)
+    print(f"Downloading data from s3://{S3_BUCKET}/{S3_DATA_KEY}...")
+    s3.download_file(S3_BUCKET, S3_DATA_KEY, ZIP_PATH)
 
 def main():
     # 1. Setup Data
+
+    if not os.path.exists(ZIP_PATH):
+        download_data_from_s3()
+        
     if not os.path.exists(EXTRACT_PATH):
         print(f"Extracting {ZIP_PATH}...")
         with zipfile.ZipFile(ZIP_PATH, 'r') as zip_ref:
