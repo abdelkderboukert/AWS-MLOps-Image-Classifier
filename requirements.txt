@@ -9,3 +9,4 @@ pycocoevalcap
 boto3
 aws-cdk-lib
 constructs
+aws_cdk
