@@ -10,7 +10,8 @@ jobs:
     job-1:
         runs-on: ubuntu-latest
         outputs:
-            OUT: ${{steps.s11.outputs.OUT}}
+            A: ${{steps.s11.outputs.A}}
+            B: ${{steps.s11.outputs.B}}
         strategy:
             matrix:
                 A: [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -26,10 +27,15 @@ jobs:
         steps:
             - name: summe th valeu
               id: s11
-              run: echo ${{matrix.A}} + ${{matrix.B}} > $GITHUB_OUTPUT
+              if: matrix.B == 'e' && matrix.A == 2
+              run: |
+                  B=${{matrix.B}} >> $GITHUB_OUTPUT
+                  A=${{matrix.A}} >> $GITHUB_OUTPUT
+
     job-2:
         runs-on: ubuntu-latest
         needs: [job-1]
         steps:
             - name: show the resualt
-              run: echo ${{needs.job-1.outputs.OUT}}
+              if: needs.job-1.outputs.A == 2 && needs.job-1.outputs.B == 'e'
+              run: echo ${{needs.job-1.outputs.B}}
