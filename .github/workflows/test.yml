@@ -2,6 +2,7 @@ name: for learn
 
 on:
     workflow_dispatch:
+    workflow_call:
 
 concurrency:
     group: group-1
