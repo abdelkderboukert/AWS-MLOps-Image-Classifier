@@ -14,8 +14,5 @@ on:
 
 jobs:
     run_echo:
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: call an other workflow
-              uses: ./.github/workflows/test.yml@master
+        name: call an other workflow
+        uses: ./.github/workflows/test.yml
