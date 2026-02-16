@@ -45,3 +45,22 @@ jobs:
               id: S33
               run: |
                   cat CacheV1/output.txt
+    job-4:
+        runs-on: ubuntu-latest
+        outputs:
+            K: ${{steps.S41.outputs.B}}
+        steps:
+            - name: set valeu for B
+              id: S41
+              run: echo B=24 >> $GITHUB_OUTPUT
+
+    job-5:
+        runs-on: ubuntu-latest
+        needs: [job-4, job-1]
+        env:
+            Key: need.job-4.outputs.B
+            valeu: needs.job-1.outputs.A
+        steps:
+            - name: try 2
+              id: S51
+              run: echo $(( key + valeu ))
