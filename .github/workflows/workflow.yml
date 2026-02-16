@@ -48,7 +48,7 @@ jobs:
     job-4:
         runs-on: ubuntu-latest
         outputs:
-            K: ${{steps.S41.outputs.B}}
+            B: ${{steps.S41.outputs.B}}
         steps:
             - name: set valeu for B
               id: S41
