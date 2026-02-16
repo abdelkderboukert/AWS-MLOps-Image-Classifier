@@ -28,7 +28,7 @@ jobs:
 
     job-3:
         runs-on: ubuntu-latest
-        needs: [job-1, job-2]
+        needs: [job-1]
         steps:
             - name: push file to cache
               id: S31
